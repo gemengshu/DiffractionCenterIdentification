@@ -50,7 +50,7 @@ class Model1(nn.Module):
         self.__bn9_2 = nn.BatchNorm2d(32)
         self.__conv9_3 = nn.Conv2d(32, 1, 1)
         
-        self.__fc = nn.Linear((size/4)*(size/4),2)
+        self.__fc = nn.Linear(int((size/4)*(size/4)),2)
 
         self.__maxpool = nn.MaxPool2d(
             2, stride=2, return_indices=False, ceil_mode=False)
@@ -71,10 +71,10 @@ class Model1(nn.Module):
             F.relu(self.__bn7_1(self.__conv7_1(xup))))))
         xup = self.__bn7(self.__upconv7(self.__maxpool(xup)))
         
-        xup = F.relu(self.__bn9_3(self.__conv9_3(F.relu(self.__bn9_2(
-            self.__conv9_2(F.relu(self.__bn9_1(self.__conv9_1(xup)))))))))
+        xup = F.relu(self.__conv9_3(F.relu(self.__bn9_2(
+            self.__conv9_2(F.relu(self.__bn9_1(self.__conv9_1(xup))))))))
 
-        return F.sigmoid(self.__fc(xup))
+        return F.sigmoid(self.__fc(torch.flatten(xup, start_dim=1)))
 
     def _initialize_weights(self):
 

@@ -5,6 +5,7 @@ from openpyxl import load_workbook
 
 import numpy as np
 from os.path import exists, join
+import torch
 import torch.utils.data as data
 from torch.utils.data import DataLoader
 from torchvision.transforms import Compose, CenterCrop, ToTensor
@@ -48,10 +49,7 @@ class DatasetFromFolder(data.Dataset):
 
     def load_img(self, filepath):
 
-        if self.colordim == 1:
-            img = Image.open(filepath).convert('L')
-        else:
-            img = Image.open(filepath).convert('RGB')
+        img = Image.open(filepath).convert('L')
         return img
 
     def __getitem__(self, index):
@@ -60,13 +58,14 @@ class DatasetFromFolder(data.Dataset):
         input = self.load_img(image_name)
 
         center = np.array((self.centers_and_names[index][1]/input.width, self.centers_and_names[index][2]/input.height))
-        temp = np.fromiter(iter(input.getdata()), np.uint8)
-        temp.resize(self.size, self.size)
-        input = Image.fromarray(temp, mode='L')
+        #temp = np.fromiter(iter(input.getdata()), np.uint8)
+        if self.resize:
+            input = input.resize((self.size, self.size))        
+
             
         transform = ToTensor()
         input = transform(input)
-        center = transform(center)
+        center = torch.tensor(torch.tensor(center).float())
         return input, center
 
     def __len__(self):
