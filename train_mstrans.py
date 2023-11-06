@@ -51,22 +51,6 @@ test_image_display = torch.unsqueeze(test_image_display,0)
 
 model = MS_Trans(3,1)
 
-## FCN8s
-# model = FCN8(1)
-
-## DeepLabV3
-# model = models.segmentation.deeplabv3_resnet101(pretrained = True)
-# model.classifier = DeepLabHead(2048, 1)
-
-## UNet
-# model = UNet(1)
-
-## NestedUNet
-# model = NestedUNet(1,deep_supervision=True)
-
-## LCA-UNet
-# model = LCA_Unet(3)
-
 pretrain = False
 
 pretrain_num = 4999

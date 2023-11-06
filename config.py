@@ -3,11 +3,11 @@ SIZE = 512
 
 ## training settings
 BATCH_SIZE = 4
-LR = 1e-4
+LR = 1e-5
 EPOCHS = 10000
 USE_CUDA = True
 BETA = 0.5
-THREAD = 6
+THREAD = 8
 
 ## test settings
 TEST_BATCH_SIZE = 1
