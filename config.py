@@ -5,9 +5,9 @@ SIZE = 512
 BATCH_SIZE = 4
 LR = 1e-5
 EPOCHS = 10000
-USE_CUDA = True
+USE_CUDA = False
 BETA = 0.5
-THREAD = 8
+THREAD = 4
 
 ## test settings
 TEST_BATCH_SIZE = 1
