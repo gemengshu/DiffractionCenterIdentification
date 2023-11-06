@@ -21,6 +21,8 @@ from mstrans import MS_Trans
 
 import random
 
+# The data are available at:
+# https://drive.google.com/file/d/1vwPCt3Gvc45Z8yNGo2RRAE1oOIdXlLpx/view?usp=sharing
 
 def train_mstrans():
     train_folder = 'training_new/'
